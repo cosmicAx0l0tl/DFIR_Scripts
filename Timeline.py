@@ -2,6 +2,7 @@ import sys
 import csv
 import os
 import re
+import datetime
 
 file_list = []
 head = ['Timestamp (UTC)', 'Activity', 'Details']
@@ -117,7 +118,11 @@ for file in file_list:
 				evt = [line['TargetAccessed'], 'LNK Taget Accessed', deets]
 				det.append(evt)
 
-with open(directory+"\\"+"timeline.csv", 'w', encoding="utf-8") as wr:
+time = datetime.datetime.now()
+timestamp = str(time.year)+str(time.month)+str(time.day)+str(time.hour)+str(time.minute)+str(time.second)
+
+
+with open(sys.argv[2]+"\\" + timestamp + "_" + "Timeline.csv", 'w', encoding="utf-8") as wr:
 	csvwriter = csv.writer(wr)
 	csvwriter.writerow(head)
 	csvwriter.writerows(det)
